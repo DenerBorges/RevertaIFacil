@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { COLORS } from "../../assets/colors";
+import { COLORS } from "../../../assets/colors";
 
 export const Container = styled.div`
   display: flex;
@@ -32,21 +32,13 @@ export const MainText = styled.p`
   font-weight: 600;
   margin-top: 1rem;
   margin-bottom: 1rem;
-  white-space: pre-line;
 `;
 
-export const ForgotText = styled.a`
-  margin-top: 1rem;
+export const SecondaryText = styled.p`
+  text-align: start;
   font-size: 15px;
-  font-weight: 600;
-  color: ${COLORS.black};
-  text-decoration: underline 0.15em rgba(255, 255, 255, 0);
-  transition: text-decoration 300ms;
-
-  &:hover,
-  :focus {
-    text-decoration-color: ${COLORS.black};
-  }
+  font-weight: 500;
+  white-space: pre-line;
 `;
 
 export const Text = styled.p`
@@ -71,22 +63,6 @@ export const Link = styled.a`
   }
 `;
 
-export const Line = styled.hr`
-  background-color: ${COLORS.white};
-  border: none;
-  margin: 0.7rem 0 0 0;
-  height: 0.3rem;
-  width: 33%;
-
-  @media (min-width: 768px) {
-    width: 40%;
-  }
-
-  @media (min-width: 1024px) {
-    width: 41%;
-  }
-`;
-
 export const Input = styled.input`
   background-color: ${COLORS.white};
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
@@ -102,37 +78,6 @@ export const Input = styled.input`
   &::placeholder {
     color: #adadad;
   }
-
-  &::-ms-reveal {
-    display: none;
-  }
-`;
-
-export const ContainerIcon = styled.div`
-  position: relative;
-
-  & svg {
-    position: absolute;
-    top: 20%;
-    right: 4.5%;
-    width: 25px;
-    height: 25px;
-    color: rgb(100, 100, 100);
-  }
-`;
-
-export const ButtonEye = styled.button`
-  display: flex;
-  align-items: center;
-  position: absolute;
-  right: 20px;
-  top: 50%;
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
 `;
 
 export const ContainerButton = styled.div`
@@ -144,7 +89,7 @@ export const PrimaryButton = styled.button`
   display: flex;
   justify-content: center;
   align-self: center;
-  padding: 1rem 4rem;
+  padding: 1rem 2rem;
   margin-top: 2.5rem;
   margin-bottom: 2.5rem;
   border: none;
@@ -168,48 +113,6 @@ export const PrimaryButton = styled.button`
   }
 `;
 
-export const SocialButton = styled.button`
-  flex: 50%;
-  padding: 10px;
-  align-self: center;
-  padding: 1rem 3rem 0.8rem 3rem;
-  margin-top: 1.3rem;
-  margin-bottom: 3rem;
-  border: none;
-  border-radius: 0.6rem;
-  background-color: ${COLORS.white};
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  max-width: 90%;
-
-  &:hover {
-    background-color: rgba(230, 230, 230);
-  }
-
-  &:focus {
-    outline: none;
-    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
-  }
-`;
-
-export const Col = styled.div`
-  display: flex;
-  gap: 1.5rem;
-`;
-
-export const Col2 = styled.div`
-  display: flex;
-  justify-content: center;
-`;
-
-export const Col3 = styled.div`
-  display: flex;
-  justify-content: flex-end;
-`;
-
 export const Space = styled.div`
-  margin-top: 4.5rem;
+  margin-top: 20rem;
 `;

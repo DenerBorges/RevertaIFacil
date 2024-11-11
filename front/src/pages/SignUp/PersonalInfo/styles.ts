@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { COLORS } from "../../assets/colors";
+import { COLORS } from "../../../assets/colors";
 
 export const Container = styled.div`
   display: flex;
@@ -7,7 +7,7 @@ export const Container = styled.div`
   min-height: 100vh;
   justify-content: center;
   background-color: ${COLORS.secondary};
-  padding: 5rem 2rem 7rem 2rem;
+  padding: 1.5rem 2rem 0 2rem;
   max-width: 100vw;
   margin: 0 auto;
 `;
@@ -31,60 +31,7 @@ export const MainText = styled.p`
   font-size: 26px;
   font-weight: 600;
   margin-top: 1rem;
-  margin-bottom: 1rem;
   white-space: pre-line;
-`;
-
-export const ForgotText = styled.a`
-  margin-top: 1rem;
-  font-size: 15px;
-  font-weight: 600;
-  color: ${COLORS.black};
-  text-decoration: underline 0.15em rgba(255, 255, 255, 0);
-  transition: text-decoration 300ms;
-
-  &:hover,
-  :focus {
-    text-decoration-color: ${COLORS.black};
-  }
-`;
-
-export const Text = styled.p`
-  text-align: center;
-  font-size: 15px;
-  font-weight: 500;
-  padding: 0 0.5rem;
-`;
-
-export const Link = styled.a`
-  display: block;
-  text-align: center;
-  font-size: 15px;
-  font-weight: bold;
-  color: ${COLORS.primary};
-  text-decoration: underline 0.15em rgba(255, 255, 255, 0);
-  transition: text-decoration 300ms;
-
-  &:hover,
-  :focus {
-    text-decoration-color: ${COLORS.primary};
-  }
-`;
-
-export const Line = styled.hr`
-  background-color: ${COLORS.white};
-  border: none;
-  margin: 0.7rem 0 0 0;
-  height: 0.3rem;
-  width: 33%;
-
-  @media (min-width: 768px) {
-    width: 40%;
-  }
-
-  @media (min-width: 1024px) {
-    width: 41%;
-  }
 `;
 
 export const Input = styled.input`
@@ -135,6 +82,44 @@ export const ButtonEye = styled.button`
   align-items: center;
 `;
 
+export const Text = styled.p`
+  text-align: center;
+  font-size: 15px;
+  font-weight: 500;
+  padding: 0 0.5rem;
+`;
+
+export const Link = styled.a`
+  display: block;
+  text-align: center;
+  font-size: 15px;
+  font-weight: bold;
+  color: ${COLORS.primary};
+  text-decoration: underline 0.15em rgba(255, 255, 255, 0);
+  transition: text-decoration 300ms;
+
+  &:hover,
+  :focus {
+    text-decoration-color: ${COLORS.primary};
+  }
+`;
+
+export const Line = styled.hr`
+  background-color: ${COLORS.white};
+  border: none;
+  margin: 0.7rem 0 0 0;
+  height: 0.3rem;
+  width: 25%;
+
+  @media (min-width: 768px) {
+    width: 35%;
+  }
+
+  @media (min-width: 1024px) {
+    width: 37%;
+  }
+`;
+
 export const ContainerButton = styled.div`
   display: flex;
   justify-content: center;
@@ -173,8 +158,7 @@ export const SocialButton = styled.button`
   padding: 10px;
   align-self: center;
   padding: 1rem 3rem 0.8rem 3rem;
-  margin-top: 1.3rem;
-  margin-bottom: 3rem;
+  margin: 1.3rem 0;
   border: none;
   border-radius: 0.6rem;
   background-color: ${COLORS.white};
@@ -203,13 +187,4 @@ export const Col = styled.div`
 export const Col2 = styled.div`
   display: flex;
   justify-content: center;
-`;
-
-export const Col3 = styled.div`
-  display: flex;
-  justify-content: flex-end;
-`;
-
-export const Space = styled.div`
-  margin-top: 4.5rem;
 `;

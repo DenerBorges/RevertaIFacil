@@ -4,43 +4,43 @@ import { ChevronLeftIcon } from "@heroicons/react/24/outline";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/solid";
 
 import {
-  Container,
-  ForgotText,
-  Input,
-  Line,
-  MainText,
-  Text,
-  Link,
-  PrimaryButton,
-  SocialButton,
+  ButtonEye,
   Col,
   Col2,
-  Col3,
-  Space,
-  ButtonEye,
+  Container,
+  ContainerButton,
   ContainerIcon,
   ContentWrapper,
-  ContainerButton,
+  Input,
+  Line,
+  Link,
+  MainText,
+  PrimaryButton,
+  SocialButton,
+  Text,
 } from "./styles";
 
-const SignIn: React.FC = () => {
+const PersonalInfo: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const navigate = useNavigate();
 
   return (
     <Container>
       <ContentWrapper>
-        <a href="/" aria-label="Acesse para voltar">
+        <a href="/user" aria-label="Acesse para voltar">
           <ChevronLeftIcon width={20} strokeWidth={3} color="#319E42" />
         </a>
-        <MainText>{"Bem-vindo de volta! \r\nFaça seu login"}</MainText>
-        <Input type="email" id="email" placeholder="Digite seu email" />
+        <MainText>{"Olá! \r\nVamos começar?"}</MainText>
+        <Input type="text" id="name" placeholder="Primeiro nome" />
+        <Input type="text" id="name2" placeholder="Último nome" />
+        <Input type="email" id="email" placeholder="Email" />
         <ContainerIcon>
           <Input
             type={showPassword ? "text" : "password"}
             id="password"
-            placeholder="Digite sua senha"
+            placeholder="Senha"
           />
           <ButtonEye
             type="button"
@@ -50,46 +50,53 @@ const SignIn: React.FC = () => {
             {showPassword ? <EyeSlashIcon /> : <EyeIcon />}
           </ButtonEye>
         </ContainerIcon>
-        <Col3>
-          <ForgotText href="/forgotpassword" aria-label="Esqueci a senha">
-            Esqueceu a senha?
-          </ForgotText>
-        </Col3>
+        <ContainerIcon>
+          <Input
+            type={showConfirmPassword ? "text" : "password"}
+            id="ConfirmPassword"
+            placeholder="Confirme a senha"
+          />
+          <ButtonEye
+            type="button"
+            className="btn-eye"
+            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+          >
+            {showConfirmPassword ? <EyeSlashIcon /> : <EyeIcon />}
+          </ButtonEye>
+        </ContainerIcon>
         <ContainerButton>
-          <PrimaryButton type="button" onClick={() => navigate("/home")}>
-            Entrar
+          <PrimaryButton type="button" onClick={() => navigate("/contactinfo")}>
+            Avançar
           </PrimaryButton>
         </ContainerButton>
         <Col2>
           <Line />
-          <Text>Ou entre com</Text>
+          <Text>Ou cadastre-se com</Text>
           <Line />
         </Col2>
         <Col>
           <SocialButton type="button">
             <img
-              src={require("../../assets/images/White_Facebook.png")}
+              src={require("../../../assets/images/White_Facebook.png")}
               alt="Facebook"
               width={30}
             />
           </SocialButton>
           <SocialButton type="button">
             <img
-              src={require("../../assets/images/Google__G__logo.png")}
+              src={require("../../../assets/images/Google__G__logo.png")}
               alt="Google"
               width={30}
             />
           </SocialButton>
         </Col>
-        <Space>
-          <Text>Ainda não tem uma conta?</Text>
-        </Space>
-        <Link href="/user" aria-label="Acesse para cadastrar">
-          Faça seu cadastro
+        <Text>Já possui uma conta?</Text>
+        <Link href="/signin" aria-label="Acesse para logar">
+          Faça seu login
         </Link>
       </ContentWrapper>
     </Container>
   );
 };
 
-export default SignIn;
+export default PersonalInfo;

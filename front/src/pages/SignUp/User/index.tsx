@@ -32,7 +32,7 @@ const User: React.FC = () => {
         <a href="/" aria-label="Acesse para voltar">
           <ChevronLeftIcon width={20} strokeWidth={3} color="#319E42" />
         </a>
-        <MainText>{"Bem-vindo de volta! \r\nFaça seu login"}</MainText>
+        <MainText>{"Olá! \r\nVamos começar?"}</MainText>
         <SecondaryText>Por favor, selecione o tipo de usuário</SecondaryText>
         <RadioGroup>
           <RadioContainer>
@@ -67,7 +67,10 @@ const User: React.FC = () => {
           </RadioContainer>
         </RadioGroup>
         <ContainerButton>
-          <PrimaryButton type="button" onClick={() => navigate("/home")}>
+          <PrimaryButton
+            type="button"
+            onClick={() => navigate("/personalinfo")}
+          >
             Avançar
           </PrimaryButton>
         </ContainerButton>
