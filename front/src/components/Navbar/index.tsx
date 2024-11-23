@@ -15,6 +15,7 @@ const Navbar: React.FC<NavbarProps> = ({ transparent }) => {
       <Logo
         src={require("../../assets/images/logo192.png")}
         alt="Logo do App"
+        onClick={() => navigate("/home")}
       />
       <ProfileImage
         src={require("../../assets/images/White_Facebook.png")}

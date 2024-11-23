@@ -20,6 +20,9 @@ export const Container = styled.div<{ transparent?: boolean }>`
 export const Logo = styled.img`
   width: 45px;
   height: 45px;
+  border-radius: 50%;
+  cursor: pointer;
+  object-fit: cover;
 `;
 
 export const ProfileImage = styled.img`
