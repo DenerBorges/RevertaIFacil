@@ -9,6 +9,10 @@ import User from "../pages/SignUp/User";
 import PersonalInfo from "../pages/SignUp/PersonalInfo";
 import ContactInfo from "../pages/SignUp/ContactInfo";
 import Home from "../pages/Home";
+import Profile from "../pages/Profile/ProfileHome";
+import MyData from "../pages/Profile/MyData";
+import Notifications from "../pages/Profile/Notifications";
+import Help from "../pages/Profile/Help";
 
 const RoutesApp: React.FC = () => {
   return (
@@ -23,6 +27,10 @@ const RoutesApp: React.FC = () => {
           <Route path="/personalinfo" element={<PersonalInfo />} />
           <Route path="/contactinfo" element={<ContactInfo />} />
           <Route path="/home" element={<Home />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/mydata" element={<MyData />} />
+          <Route path="/notifications" element={<Notifications />} />
+          <Route path="/help" element={<Help />} />
         </Routes>
       </Fragment>
     </BrowserRouter>
