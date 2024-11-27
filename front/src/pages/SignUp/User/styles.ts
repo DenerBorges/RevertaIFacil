@@ -26,6 +26,20 @@ export const ContentWrapper = styled.div`
   }
 `;
 
+export const BackButton = styled.button`
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:focus {
+    outline: none;
+  }
+`;
+
 export const MainText = styled.p`
   text-align: start;
   font-size: 26px;
@@ -124,6 +138,11 @@ export const Input = styled.input`
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   border: solid 1px #f1f1f1;
   margin: 1rem 0.5rem 1rem 1rem;
+`;
+
+export const ErrorText = styled.p`
+  color: red;
+  font-size: 14px;
 `;
 
 export const ContainerButton = styled.div`

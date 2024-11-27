@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import InputMask from "react-input-mask";
 import { COLORS } from "../../../assets/colors";
 
 export const Container = styled.div`
@@ -26,6 +27,20 @@ export const ContentWrapper = styled.div`
   }
 `;
 
+export const BackButton = styled.button`
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:focus {
+    outline: none;
+  }
+`;
+
 export const MainText = styled.p`
   text-align: start;
   font-size: 26px;
@@ -34,7 +49,7 @@ export const MainText = styled.p`
   white-space: pre-line;
 `;
 
-export const Input = styled.input`
+export const Input = styled.input<{ hasError: boolean }>`
   background-color: ${COLORS.white};
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   border: solid 2px #f1f1f1;
@@ -51,9 +66,44 @@ export const Input = styled.input`
     color: #adadad;
   }
 
+  &:focus {
+    border-color: ${(props) => (props.hasError ? COLORS.red : COLORS.primary)};
+  }
+
   &::-webkit-inner-spin-button {
     -webkit-appearance: none;
   }
+`;
+
+export const StyledInputMask = styled(InputMask)<{ hasError: boolean }>`
+  background-color: ${COLORS.white};
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  border: solid 2px #f1f1f1;
+  border-radius: 0.6rem;
+  margin-top: 1.5rem;
+  height: 3.5rem;
+  font-size: 17px;
+  padding: 1.2rem;
+  padding-top: 1.4rem;
+  width: 100%;
+  -moz-appearance: textfield;
+
+  &::placeholder {
+    color: #adadad;
+  }
+
+  &:focus {
+    border-color: ${(props) => (props.hasError ? COLORS.red : COLORS.primary)};
+  }
+
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
+`;
+
+export const ErrorText = styled.p`
+  color: ${COLORS.red};
+  font-size: 14px;
 `;
 
 export const Link = styled.a`

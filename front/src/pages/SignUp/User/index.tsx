@@ -3,11 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { ChevronLeftIcon } from "@heroicons/react/24/outline";
 
 import {
+  BackButton,
   Col,
   Col2,
   Container,
   ContainerButton,
   ContentWrapper,
+  ErrorText,
   Input,
   Line,
   Link,
@@ -22,18 +24,33 @@ import {
 } from "./styles";
 
 const User: React.FC = () => {
-  const [selectedOption, setSelectedOption] = useState("");
+  const [selectedOption, setSelectedOption] = useState<string>("");
+  const [error, setError] = useState<string | null>(null);
 
   const navigate = useNavigate();
+
+  const handleNext = () => {
+    if (!selectedOption) {
+      setError("Por favor, selecione um tipo de usuário.");
+      return;
+    }
+    setError(null);
+    navigate("/personalinfo", { state: { selectedOption } });
+  };
 
   return (
     <Container>
       <ContentWrapper>
-        <a href="/" aria-label="Acesse para voltar">
+        <BackButton
+          type="button"
+          onClick={() => navigate(-1)}
+          aria-label="Acesse para voltar"
+        >
           <ChevronLeftIcon width={20} strokeWidth={3} color="#319E42" />
-        </a>
+        </BackButton>
         <MainText>{"Olá! \r\nVamos começar?"}</MainText>
         <SecondaryText>Por favor, selecione o tipo de usuário</SecondaryText>
+        {error && <ErrorText>{error}</ErrorText>}
         <RadioGroup>
           <RadioContainer>
             <Input
@@ -67,10 +84,7 @@ const User: React.FC = () => {
           </RadioContainer>
         </RadioGroup>
         <ContainerButton>
-          <PrimaryButton
-            type="button"
-            onClick={() => navigate("/personalinfo")}
-          >
+          <PrimaryButton type="button" onClick={handleNext}>
             Avançar
           </PrimaryButton>
         </ContainerButton>
