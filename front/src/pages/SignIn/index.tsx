@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ChevronLeftIcon } from "@heroicons/react/24/outline";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/solid";
+import api from "../../utils/api";
 
 import {
   Container,
@@ -21,27 +22,76 @@ import {
   ContainerIcon,
   ContentWrapper,
   ContainerButton,
+  BackButton,
+  ErrorText,
 } from "./styles";
 
 const SignIn: React.FC = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
   const navigate = useNavigate();
+
+  const handleLogin = async (e: FormEvent) => {
+    e.preventDefault();
+
+    const newErrors: { [key: string]: string } = {};
+
+    if (!email) newErrors.email = "O email é obrigatório!";
+    if (!password) newErrors.password = "A senha é obrigatória!";
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+
+    try {
+      const response = await api.post(`login`, { user: email, password });
+      const { access_token, user_email } = response.data;
+
+      localStorage.setItem("userToken", access_token);
+      localStorage.setItem("userEmail", user_email);
+      navigate("/home");
+    } catch (error: any) {
+      setErrors({
+        ...errors,
+        api: "Seu email ou senha estão incorretos!",
+      });
+    }
+  };
 
   return (
     <Container>
       <ContentWrapper>
-        <a href="/" aria-label="Acesse para voltar">
+        <BackButton
+          type="button"
+          onClick={() => navigate("/")}
+          aria-label="Acesse para voltar"
+        >
           <ChevronLeftIcon width={20} strokeWidth={3} color="#319E42" />
-        </a>
+        </BackButton>
         <MainText>{"Bem-vindo de volta! \r\nFaça seu login"}</MainText>
-        <Input type="email" id="email" placeholder="Digite seu email" />
+        <Input
+          type="email"
+          id="email"
+          placeholder="Digite seu email"
+          value={email || ""}
+          onChange={(e) => [setEmail(e.target.value)]}
+          hasError={!!errors.email}
+        />
+        {errors.email && <ErrorText>{errors.email}</ErrorText>}
         <ContainerIcon>
           <Input
             type={showPassword ? "text" : "password"}
             id="password"
             placeholder="Digite sua senha"
+            value={password || ""}
+            onChange={(e) => [setPassword(e.target.value)]}
+            hasError={!!errors.password}
           />
+          {errors.password && <ErrorText>{errors.password}</ErrorText>}
           <ButtonEye
             type="button"
             className="btn-eye"
@@ -55,8 +105,9 @@ const SignIn: React.FC = () => {
             Esqueceu a senha?
           </ForgotText>
         </Col3>
+        {errors.api && <ErrorText>{errors.api}</ErrorText>}
         <ContainerButton>
-          <PrimaryButton type="button" onClick={() => navigate("/home")}>
+          <PrimaryButton type="button" onClick={handleLogin}>
             Entrar
           </PrimaryButton>
         </ContainerButton>
