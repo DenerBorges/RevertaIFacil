@@ -10,6 +10,12 @@ import {
 import { Container, ContentWrapper, HR, Link, MainText, Text } from "./styles";
 
 const Profile: React.FC = () => {
+
+  const handleLogout = () => {
+    localStorage.removeItem("userToken");
+    localStorage.removeItem("userEmail");
+  };
+
   return (
     <>
       <Navbar />
@@ -31,7 +37,7 @@ const Profile: React.FC = () => {
             <Text>Ajuda</Text>
           </Link>
           <HR />
-          <Link href="/" aria-label="Sair">
+          <Link href="/" aria-label="Sair" onClick={handleLogout}>
             <ArrowRightStartOnRectangleIcon width={30} strokeWidth={2} />
             <Text>Sair</Text>
           </Link>
