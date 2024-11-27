@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import { ChevronLeftIcon } from "@heroicons/react/24/outline";
 import { useNavigate } from "react-router-dom";
+import { ChevronLeftIcon } from "@heroicons/react/24/outline";
+import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/solid";
 
 import {
+  BackButton,
   ButtonEye,
   Container,
   ContainerButton,
@@ -13,7 +15,6 @@ import {
   PrimaryButton,
   Space,
 } from "./styles";
-import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/solid";
 
 const ResetPass: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -24,9 +25,13 @@ const ResetPass: React.FC = () => {
   return (
     <Container>
       <ContentWrapper>
-        <a href="/forgotpassword" aria-label="Acesse para voltar">
+        <BackButton
+          type="button"
+          onClick={() => navigate(-1)}
+          aria-label="Acesse para voltar"
+        >
           <ChevronLeftIcon width={20} strokeWidth={3} color="#319E42" />
-        </a>
+        </BackButton>
         <MainText>Pronto!</MainText>
         <MainText>Crie uma nova senha</MainText>
         <Input type="text" id="code" placeholder="Digite o código recebido" />

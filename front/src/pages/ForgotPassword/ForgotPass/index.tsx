@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { ChevronLeftIcon } from "@heroicons/react/24/outline";
 
 import {
+  BackButton,
   Container,
   ContainerButton,
   ContentWrapper,
@@ -21,9 +22,13 @@ const ForgotPass: React.FC = () => {
   return (
     <Container>
       <ContentWrapper>
-        <a href="/signin" aria-label="Acesse para voltar">
+        <BackButton
+          type="button"
+          onClick={() => navigate(-1)}
+          aria-label="Acesse para voltar"
+        >
           <ChevronLeftIcon width={20} strokeWidth={3} color="#319E42" />
-        </a>
+        </BackButton>
         <MainText>Esqueceu sua senha?</MainText>
         <SecondaryText>
           {"Por favor, insira o email vinculado\r\n a sua conta"}
