@@ -31,4 +31,8 @@ export const ProfileImage = styled.img`
   border-radius: 50%;
   cursor: pointer;
   object-fit: cover;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
 `;
