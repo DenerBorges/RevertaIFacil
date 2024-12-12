@@ -13,7 +13,7 @@ const Navbar: React.FC<NavbarProps> = ({ transparent }) => {
   const [profile, setProfile] = useState<userType>();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getProfile = async () => {
@@ -32,6 +32,10 @@ const Navbar: React.FC<NavbarProps> = ({ transparent }) => {
     }
   }, [isLoggedIn]);
 
+  function isBase64Image(image?: string) {
+    return image && !image.startsWith("http");
+  }
+
   return (
     <Container transparent={transparent}>
       <Logo
@@ -39,11 +43,20 @@ const Navbar: React.FC<NavbarProps> = ({ transparent }) => {
         alt="Logo do App"
         onClick={() => navigate("/home")}
       />
-      <ProfileImage
-        src={profile?.profilePic}
-        alt="Foto de perfil"
-        onClick={() => navigate("/profile")}
-      />
+      {!isBase64Image(profile?.profilePic) ? (
+        <ProfileImage
+          src={profile?.profilePic}
+          alt="Foto de perfil"
+          onClick={() => navigate("/profile")}
+        />
+      ) : (
+        <ProfileImage
+          src={`data:image/jpeg;base64,${profile?.profilePic}`}
+          className="image-card d-block w-100"
+          alt="Foto de perfil"
+          onClick={() => navigate("/profile")}
+        />
+      )}
     </Container>
   );
 };

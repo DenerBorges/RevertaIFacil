@@ -8,7 +8,7 @@ export const Container = styled.div`
   min-height: 100vh;
   justify-content: center;
   background-color: ${COLORS.secondary};
-  padding: 5rem 2rem 0 2rem;
+  padding: 6rem 2rem 0 2rem;
   max-width: 100vw;
 `;
 
@@ -43,12 +43,86 @@ export const BackButton = styled.button`
 export const Col = styled.div`
   display: flex;
   margin-top: 1.5rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 `;
 
 export const Text = styled.p`
+  margin-top: 0.5rem;
   margin-left: 1rem;
   font-size: 22px;
+`;
+export const ProfileImage = styled.img`
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  object-fit: cover;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+`;
+
+export const ModalOverlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+`;
+
+export const ModalContent = styled.div`
+  background: ${COLORS.white};
+  padding: 2rem 3rem;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+
+  input {
+    margin-bottom: 2rem;
+  }
+`;
+
+export const ModalTitle = styled.h3`
+  margin-bottom: 3rem;
+  font-size: 18px;
+  color: #333;
+`;
+
+export const ModalButton = styled.button`
+  margin-top: 16px;
+  padding: 10px 16px;
+  background-color: ${COLORS.primary};
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: ${COLORS.primaryDark};
+  }
+`;
+
+export const ModalCloseButton = styled.button`
+  margin-top: 16px;
+  padding: 10px 16px;
+  background-color: ${COLORS.red};
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: ${COLORS.redDark};
+  }
 `;
 
 export const Label = styled.label`
@@ -60,11 +134,11 @@ export const Input = styled.input<{ hasError: boolean }>`
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   border: solid 2px #f1f1f1;
   border-radius: 0.6rem;
-  margin: 1rem 0;
+  margin: 0.5rem 0;
   height: 2.5rem;
   font-size: 17px;
-  padding: 1.2rem;
-  padding-top: 1.4rem;
+  padding: 1.2rem 0.8rem;
+  padding-top: 1.3rem;
   width: 100%;
   -moz-appearance: textfield;
 
@@ -86,11 +160,11 @@ export const StyledInputMask = styled(InputMask)<{ hasError: boolean }>`
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   border: solid 2px #f1f1f1;
   border-radius: 0.6rem;
-  margin: 1rem 0;
+  margin: 0.5rem 0;
   height: 2.5rem;
   font-size: 17px;
-  padding: 1.2rem;
-  padding-top: 1.4rem;
+  padding: 1.2rem 0.8rem;
+  padding-top: 1.3rem;
   width: 100%;
   -moz-appearance: textfield;
 
