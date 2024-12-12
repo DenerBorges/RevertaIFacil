@@ -44,7 +44,20 @@ export class UsersService {
     return foundUser;
   }
 
-  async update(id: number, data: Partial<User>): Promise<User> {
+  async update(
+    id: number,
+    data: Partial<User>,
+    image?: Express.Multer.File,
+  ): Promise<User> {
+    const existingUser = await this.prisma.user.findUnique({ where: { id } });
+    if (!existingUser) {
+      throw new Error('Usuário não encontrado.');
+    }
+
+    if (image) {
+      const imageStrings = image.buffer.toString('base64');
+      data.profilePic = imageStrings;
+    }
     const updatedUser = await this.prisma.user.update({
       where: { id },
       data,
