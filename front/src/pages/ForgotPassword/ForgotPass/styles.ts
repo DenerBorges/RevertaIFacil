@@ -77,7 +77,7 @@ export const Link = styled.a`
   }
 `;
 
-export const Input = styled.input`
+export const Input = styled.input<{ hasError: boolean }>`
   background-color: ${COLORS.white};
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   border: solid 2px #f1f1f1;
@@ -94,12 +94,17 @@ export const Input = styled.input`
   }
 `;
 
+export const ErrorText = styled.p`
+  color: ${COLORS.red};
+  font-size: 14px;
+`;
+
 export const ContainerButton = styled.div`
   display: flex;
   justify-content: center;
 `;
 
-export const PrimaryButton = styled.button`
+export const PrimaryButton = styled.button<{ disabled?: boolean }>`
   display: flex;
   justify-content: center;
   align-self: center;
@@ -108,17 +113,17 @@ export const PrimaryButton = styled.button`
   margin-bottom: 2.5rem;
   border: none;
   border-radius: 0.6rem;
-  background-color: ${COLORS.primary};
+  background-color: ${(props) => (props.disabled ? "gray" : COLORS.primary)};
   color: ${COLORS.white};
   font-size: 1rem;
   font-weight: 600;
-  cursor: pointer;
+  cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
   transition: background-color 0.3s ease;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   max-width: 90%;
 
   &:hover {
-    background-color: ${COLORS.primaryDark};
+    background-color: ${(props) => (props.disabled ? "gray" : COLORS.primaryDark)};
   }
 
   &:focus {

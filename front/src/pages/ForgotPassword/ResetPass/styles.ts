@@ -70,7 +70,7 @@ export const Link = styled.a`
   }
 `;
 
-export const Input = styled.input`
+export const Input = styled.input<{ hasError: boolean }>`
   background-color: ${COLORS.white};
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   border: solid 2px #f1f1f1;
@@ -91,6 +91,11 @@ export const Input = styled.input`
   }
 `;
 
+export const ErrorText = styled.p`
+  color: ${COLORS.red};
+  font-size: 14px;
+`;
+
 export const ContainerIcon = styled.div`
   position: relative;
 
@@ -104,12 +109,12 @@ export const ContainerIcon = styled.div`
   }
 `;
 
-export const ButtonEye = styled.button`
+export const ButtonEye = styled.button<{ hasError: boolean }>`
   display: flex;
   align-items: center;
   position: absolute;
   right: 20px;
-  top: 50%;
+  top: ${(props) => (props.hasError ? "40%" : "50%")};
   background: none;
   border: none;
   padding: 0;
