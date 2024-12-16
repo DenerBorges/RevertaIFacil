@@ -96,6 +96,7 @@ const SignIn: React.FC = () => {
             type="button"
             className="btn-eye"
             onClick={() => setShowPassword(!showPassword)}
+            hasError={!!errors.password}
           >
             {showPassword ? <EyeSlashIcon /> : <EyeIcon />}
           </ButtonEye>

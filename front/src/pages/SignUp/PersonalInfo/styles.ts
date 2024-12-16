@@ -92,12 +92,12 @@ export const ContainerIcon = styled.div`
   }
 `;
 
-export const ButtonEye = styled.button`
+export const ButtonEye = styled.button<{ hasError: boolean }>`
   display: flex;
   align-items: center;
   position: absolute;
   right: 20px;
-  top: 50%;
+  top: ${(props) => (props.hasError ? "40%" : "50%")};
   background: none;
   border: none;
   padding: 0;

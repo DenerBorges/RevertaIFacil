@@ -144,6 +144,7 @@ const PersonalInfo: React.FC = () => {
             type="button"
             className="btn-eye"
             onClick={() => setShowPassword(!showPassword)}
+            hasError={!!errors.password}
           >
             {showPassword ? <EyeSlashIcon /> : <EyeIcon />}
           </ButtonEye>
@@ -164,6 +165,7 @@ const PersonalInfo: React.FC = () => {
             type="button"
             className="btn-eye"
             onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+            hasError={!!errors.password}
           >
             {showConfirmPassword ? <EyeSlashIcon /> : <EyeIcon />}
           </ButtonEye>
