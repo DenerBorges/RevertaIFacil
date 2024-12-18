@@ -7,19 +7,15 @@ import { userType } from "../../../types/user";
 import {
   BackButton,
   ButtonEye,
-  Col,
-  Col2,
   Container,
   ContainerButton,
   ContainerIcon,
   ContentWrapper,
   ErrorText,
   Input,
-  Line,
   Link,
   MainText,
   PrimaryButton,
-  SocialButton,
   Text,
 } from "./styles";
 
@@ -176,27 +172,6 @@ const PersonalInfo: React.FC = () => {
             Avançar
           </PrimaryButton>
         </ContainerButton>
-        <Col2>
-          <Line />
-          <Text>Ou cadastre-se com</Text>
-          <Line />
-        </Col2>
-        <Col>
-          <SocialButton type="button">
-            <img
-              src={require("../../../assets/images/White_Facebook.png")}
-              alt="Facebook"
-              width={30}
-            />
-          </SocialButton>
-          <SocialButton type="button">
-            <img
-              src={require("../../../assets/images/Google__G__logo.png")}
-              alt="Google"
-              width={30}
-            />
-          </SocialButton>
-        </Col>
         <Text>Já possui uma conta?</Text>
         <Link href="/signin" aria-label="Acesse para logar">
           Faça seu login

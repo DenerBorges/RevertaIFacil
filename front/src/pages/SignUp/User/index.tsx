@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ChevronLeftIcon } from "@heroicons/react/24/outline";
+import { GoogleLogin } from "@react-oauth/google";
+import { jwtDecode } from "jwt-decode";
+import api from "../../../utils/api";
 
 import {
   BackButton,
@@ -10,6 +13,7 @@ import {
   ContainerButton,
   ContentWrapper,
   ErrorText,
+  GoogleButtonWrapper,
   Input,
   Line,
   Link,
@@ -36,6 +40,74 @@ const User: React.FC = () => {
     }
     setError(null);
     navigate("/personalinfo", { state: { selectedOption } });
+  };
+
+  // Google
+
+  const handleButtonClick = () => {
+    const googleButton = document.querySelector(
+      ".nsm7Bb-HzV7m-LgbsSe"
+    ) as HTMLElement;
+    googleButton?.click();
+  };
+
+  const handleGoogleLoginSuccess = async (credentialResponse: any) => {
+    if (credentialResponse.credential!) {
+      const { credential } = credentialResponse;
+      const decodedToken = jwtDecode(credential);
+
+      const { given_name, family_name, email, sub }: any = decodedToken;
+
+      try {
+        const existingUserResponse = await api.get("users");
+        const existingUserEmails = existingUserResponse.data.map(
+          (user: any) => user.email
+        );
+
+        if (existingUserEmails.includes(email)) {
+          const response = await api.post("login", {
+            user: email,
+            password: sub,
+          });
+          const { access_token, user_email } = response.data;
+
+          localStorage.setItem("userToken", access_token);
+          localStorage.setItem("userEmail", user_email);
+          navigate("/home");
+        } else {
+          await api.post("users", {
+            firstName: given_name,
+            lastName: family_name,
+            email,
+            password: sub,
+            profilePic: "https://i.imgur.com/6zvhinZ.png",
+            mobile: "",
+            document: "",
+            zipCode: "",
+            street: "",
+            number: "",
+            complement: "",
+            neighborhood: "",
+            city: "",
+            state: "",
+          });
+
+          const response = await api.post("login", {
+            user: email,
+            password: sub,
+          });
+          const { access_token, user_email } = response.data;
+
+          localStorage.setItem("userToken", access_token);
+          localStorage.setItem("userEmail", user_email);
+          navigate("/home");
+        }
+      } catch (error) {
+        console.error("Erro ao verificar usuário no banco de dados:", error);
+      }
+    } else {
+      console.error("credentialResponse é undefined");
+    }
   };
 
   return (
@@ -101,13 +173,15 @@ const User: React.FC = () => {
               width={30}
             />
           </SocialButton>
-          <SocialButton type="button">
-            <img
-              src={require("../../../assets/images/Google__G__logo.png")}
-              alt="Google"
-              width={30}
+          <GoogleButtonWrapper onClick={handleButtonClick}>
+            <GoogleLogin
+              onSuccess={handleGoogleLoginSuccess}
+              onError={() => {
+                console.error("Login Failed");
+              }}
+              type="icon"
             />
-          </SocialButton>
+          </GoogleButtonWrapper>
         </Col>
         <Space>
           <Text>Já possui uma conta?</Text>

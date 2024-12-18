@@ -1,5 +1,6 @@
 import { Fragment } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 import Welcome from "../pages/Welcome";
 import SignIn from "../pages/SignIn";
@@ -21,26 +22,28 @@ import Agenda from "../pages/Agenda";
 const RoutesApp: React.FC = () => {
   return (
     <BrowserRouter basename={process.env.PUBLIC_URL}>
-      <Fragment>
-        <Routes>
-          <Route path="/" element={<Welcome />} />
-          <Route path="/signin" element={<SignIn />} />
-          <Route path="/forgotpassword" element={<ForgotPass />} />
-          <Route path="/resetpassword" element={<ResetPass />} />
-          <Route path="/user" element={<User />} />
-          <Route path="/personalinfo" element={<PersonalInfo />} />
-          <Route path="/contactinfo" element={<ContactInfo />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/mydata" element={<MyData />} />
-          <Route path="/notifications" element={<Notifications />} />
-          <Route path="/help" element={<Help />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/map" element={<Map />} />
-          <Route path="/search" element={<Search />} />
-          <Route path="/collections" element={<Collections />} />
-          <Route path="/agenda" element={<Agenda />} />
-        </Routes>
-      </Fragment>
+      <GoogleOAuthProvider clientId="74303786643-964ha739pfroom3uf2doim3rt3joqs2d.apps.googleusercontent.com">
+        <Fragment>
+          <Routes>
+            <Route path="/" element={<Welcome />} />
+            <Route path="/signin" element={<SignIn />} />
+            <Route path="/forgotpassword" element={<ForgotPass />} />
+            <Route path="/resetpassword" element={<ResetPass />} />
+            <Route path="/user" element={<User />} />
+            <Route path="/personalinfo" element={<PersonalInfo />} />
+            <Route path="/contactinfo" element={<ContactInfo />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/mydata" element={<MyData />} />
+            <Route path="/notifications" element={<Notifications />} />
+            <Route path="/help" element={<Help />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/map" element={<Map />} />
+            <Route path="/search" element={<Search />} />
+            <Route path="/collections" element={<Collections />} />
+            <Route path="/agenda" element={<Agenda />} />
+          </Routes>
+        </Fragment>
+      </GoogleOAuthProvider>
     </BrowserRouter>
   );
 };

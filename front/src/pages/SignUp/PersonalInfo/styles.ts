@@ -53,7 +53,7 @@ export const Input = styled.input<{ hasError: boolean }>`
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   border: solid 2px ${(props) => (props.hasError ? COLORS.red : "#f1f1f1")};
   border-radius: 0.6rem;
-  margin-top: 1.5rem;
+  margin-top: 2rem;
   height: 3.5rem;
   font-size: 17px;
   padding: 1.2rem;
@@ -97,7 +97,7 @@ export const ButtonEye = styled.button<{ hasError: boolean }>`
   align-items: center;
   position: absolute;
   right: 20px;
-  top: ${(props) => (props.hasError ? "40%" : "50%")};
+  top: ${(props) => (props.hasError ? "45%" : "55%")};
   background: none;
   border: none;
   padding: 0;
@@ -125,22 +125,6 @@ export const Link = styled.a`
   &:hover,
   :focus {
     text-decoration-color: ${COLORS.primary};
-  }
-`;
-
-export const Line = styled.hr`
-  background-color: ${COLORS.white};
-  border: none;
-  margin: 0.7rem 0 0 0;
-  height: 0.3rem;
-  width: 25%;
-
-  @media (min-width: 768px) {
-    width: 35%;
-  }
-
-  @media (min-width: 1024px) {
-    width: 37%;
   }
 `;
 
@@ -175,40 +159,4 @@ export const PrimaryButton = styled.button`
     outline: none;
     box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
   }
-`;
-
-export const SocialButton = styled.button`
-  flex: 50%;
-  padding: 10px;
-  align-self: center;
-  padding: 1rem 3rem 0.8rem 3rem;
-  margin: 1.3rem 0;
-  border: none;
-  border-radius: 0.6rem;
-  background-color: ${COLORS.white};
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  max-width: 90%;
-
-  &:hover {
-    background-color: rgba(230, 230, 230);
-  }
-
-  &:focus {
-    outline: none;
-    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
-  }
-`;
-
-export const Col = styled.div`
-  display: flex;
-  gap: 1.5rem;
-`;
-
-export const Col2 = styled.div`
-  display: flex;
-  justify-content: center;
 `;
