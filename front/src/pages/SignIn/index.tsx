@@ -4,6 +4,7 @@ import { ChevronLeftIcon } from "@heroicons/react/24/outline";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/solid";
 import { GoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
+import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 import api from "../../utils/api";
 
 import {
@@ -133,6 +134,16 @@ const SignIn: React.FC = () => {
     }
   };
 
+  // Facebook
+
+  const handleFacebookResponse = (response: any) => {
+    if (response.status !== "unknown") {
+      console.log("Facebook login successful:", response);
+    } else {
+      console.error("Facebook login failed");
+    }
+  };
+
   return (
     <Container>
       <ContentWrapper>
@@ -189,13 +200,27 @@ const SignIn: React.FC = () => {
           <Line />
         </Col2>
         <Col>
-          <SocialButton type="button">
-            <img
-              src={require("../../assets/images/White_Facebook.png")}
-              alt="Facebook"
-              width={30}
-            />
-          </SocialButton>
+          <FacebookLogin
+            appId="9523790070984320"
+            autoLoad={false}
+            fields="name,email,picture"
+            callback={handleFacebookResponse}
+            textButton=""
+            icon=""
+            render={(renderProps: any) => (
+              <SocialButton
+                type="button"
+                onClick={renderProps.onClick}
+                disabled={renderProps.isDisabled}
+              >
+                <img
+                  src={require("../../assets/images/White_Facebook.png")}
+                  alt="Facebook"
+                  width={30}
+                />
+              </SocialButton>
+            )}
+          />
           <GoogleButtonWrapper onClick={handleButtonClick}>
             <GoogleLogin
               onSuccess={handleGoogleLoginSuccess}
