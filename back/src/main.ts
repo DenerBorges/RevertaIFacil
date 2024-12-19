@@ -5,7 +5,11 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   app.enableCors({
-    origin: ['http://localhost:3000', 'https://reverta-ifacil.vercel.app'],
+    origin: [
+      'http://localhost:3000',
+      'https://reverta-ifacil.vercel.app',
+      'https://reverta-ifacil-denerborges-projects.vercel.app',
+    ],
     credentials: true,
   });
 
