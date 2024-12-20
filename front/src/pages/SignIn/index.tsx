@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { ChevronLeftIcon } from "@heroicons/react/24/outline";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/solid";
 import { useGoogleLogin } from "@react-oauth/google";
-import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
+import FacebookLogin from "@greatsumini/react-facebook-login";
 import api from "../../utils/api";
 
 import {
@@ -208,9 +208,7 @@ const SignIn: React.FC = () => {
             appId="9523790070984320"
             autoLoad={false}
             fields="name,email,picture"
-            callback={handleFacebookResponse}
-            textButton=""
-            icon=""
+            onSuccess={handleFacebookResponse}
             render={(renderProps: any) => (
               <SocialButton
                 type="button"
