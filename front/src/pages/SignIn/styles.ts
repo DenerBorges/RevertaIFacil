@@ -217,45 +217,6 @@ export const SocialButton = styled.button`
   }
 `;
 
-export const GoogleButtonWrapper = styled.div`
-  display: flex;
-  flex: 50%;
-  justify-content: center;
-  padding-top: 10px;
-  margin: 1.3rem 0;
-  border: none;
-  border-radius: 0.6rem;
-  background-color: ${COLORS.white};
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  max-width: 90%;
-
-  &:hover {
-    .nsm7Bb-HzV7m-LgbsSe {
-      background-color: rgba(230, 230, 230);
-    }
-    background-color: rgba(230, 230, 230);
-  }
-
-  &:focus {
-    outline: none;
-    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
-  }
-
-  .nsm7Bb-HzV7m-LgbsSe.Bz112c-LgbsSe .nsm7Bb-HzV7m-LgbsSe-Bz112c {
-    padding: 0;
-    margin: 0 0 10px 5px;
-    width: 30px;
-  }
-
-  .nsm7Bb-HzV7m-LgbsSe {
-    border: none;
-  }
-`;
-
 export const Col = styled.div`
   display: flex;
   gap: 1.5rem;

@@ -2,8 +2,7 @@ import React, { FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ChevronLeftIcon } from "@heroicons/react/24/outline";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/solid";
-import { GoogleLogin } from "@react-oauth/google";
-import { jwtDecode } from "jwt-decode";
+import { useGoogleLogin } from "@react-oauth/google";
 import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 import api from "../../utils/api";
 
@@ -27,7 +26,6 @@ import {
   ContainerButton,
   BackButton,
   ErrorText,
-  GoogleButtonWrapper,
 } from "./styles";
 
 const SignIn: React.FC = () => {
@@ -68,71 +66,77 @@ const SignIn: React.FC = () => {
 
   // Google
 
-  const handleButtonClick = () => {
-    const googleButton = document.querySelector(
-      ".nsm7Bb-HzV7m-LgbsSe"
-    ) as HTMLElement;
-    googleButton?.click();
-  };
+  const handleGoogleLoginSuccess = async (tokenResponse: any) => {
+    try {
+      const { access_token } = tokenResponse;
 
-  const handleGoogleLoginSuccess = async (credentialResponse: any) => {
-    if (credentialResponse.credential!) {
-      const { credential } = credentialResponse;
-      const decodedToken = jwtDecode(credential);
-
-      const { given_name, family_name, email, sub }: any = decodedToken;
-
-      try {
-        const existingUserResponse = await api.get("users");
-        const existingUserEmails = existingUserResponse.data.map(
-          (user: any) => user.email
-        );
-
-        if (existingUserEmails.includes(email)) {
-          const response = await api.post("login", {
-            user: email,
-            password: sub,
-          });
-          const { access_token, user_email } = response.data;
-
-          localStorage.setItem("userToken", access_token);
-          localStorage.setItem("userEmail", user_email);
-          navigate("/home");
-        } else {
-          await api.post("users", {
-            firstName: given_name,
-            lastName: family_name,
-            email,
-            password: sub,
-            profilePic: "https://i.imgur.com/6zvhinZ.png",
-            mobile: "",
-            document: "",
-            zipCode: "",
-            street: "",
-            number: "",
-            complement: "",
-            neighborhood: "",
-            city: "",
-            state: "",
-          });
-
-          const response = await api.post("login", {
-            user: email,
-            password: sub,
-          });
-          const { access_token, user_email } = response.data;
-
-          localStorage.setItem("userToken", access_token);
-          localStorage.setItem("userEmail", user_email);
-          navigate("/home");
+      const userInfoResponse = await fetch(
+        "https://www.googleapis.com/oauth2/v2/userinfo",
+        {
+          headers: {
+            Authorization: `Bearer ${access_token}`,
+          },
         }
-      } catch (error) {
-        console.error("Erro ao verificar usuário no banco de dados:", error);
+      );
+
+      const userInfo = await userInfoResponse.json();
+
+      const { given_name, family_name, email, id: sub } = userInfo;
+
+      const existingUserResponse = await api.get("users");
+      const existingUserEmails = existingUserResponse.data.map(
+        (user: any) => user.email
+      );
+
+      if (existingUserEmails.includes(email)) {
+        const response = await api.post("login", {
+          user: email,
+          password: sub,
+        });
+        const { access_token, user_email } = response.data;
+
+        localStorage.setItem("userToken", access_token);
+        localStorage.setItem("userEmail", user_email);
+        navigate("/home");
+      } else {
+        await api.post("users", {
+          firstName: given_name,
+          lastName: family_name,
+          email,
+          password: sub,
+          profilePic: "https://i.imgur.com/6zvhinZ.png",
+          mobile: "",
+          document: "",
+          zipCode: "",
+          street: "",
+          number: "",
+          complement: "",
+          neighborhood: "",
+          city: "",
+          state: "",
+        });
+
+        const response = await api.post("login", {
+          user: email,
+          password: sub,
+        });
+        const { access_token, user_email } = response.data;
+
+        localStorage.setItem("userToken", access_token);
+        localStorage.setItem("userEmail", user_email);
+        navigate("/home");
       }
-    } else {
-      console.error("credentialResponse é undefined");
+    } catch (error) {
+      console.error("Erro ao verificar usuário no banco de dados:", error);
     }
   };
+
+  const googleLogin = useGoogleLogin({
+    onSuccess: handleGoogleLoginSuccess,
+    onError: () => {
+      console.error("Login Failed");
+    },
+  });
 
   // Facebook
 
@@ -221,15 +225,13 @@ const SignIn: React.FC = () => {
               </SocialButton>
             )}
           />
-          <GoogleButtonWrapper onClick={handleButtonClick}>
-            <GoogleLogin
-              onSuccess={handleGoogleLoginSuccess}
-              onError={() => {
-                console.error("Login Failed");
-              }}
-              type="icon"
+          <SocialButton type="button" onClick={() => googleLogin()}>
+            <img
+              src={require("../../assets/images/Google__G__logo.png")}
+              alt="Google"
+              width={30}
             />
-          </GoogleButtonWrapper>
+          </SocialButton>
         </Col>
         <Space>
           <Text>Ainda não tem uma conta?</Text>
