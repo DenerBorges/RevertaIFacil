@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ForgotPasswordService } from './forgotPassword.service';
 import { ForgotPasswordController } from './forgotPassword.controller';
-import { PrismaModule } from 'src/prisma.module';
+import { PrismaModule } from '../prisma.module';
 
 @Module({
   imports: [PrismaModule],

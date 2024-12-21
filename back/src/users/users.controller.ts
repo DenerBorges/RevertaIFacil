@@ -14,8 +14,8 @@ import {
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { User } from '@prisma/client';
-import { IsPublic } from 'src/auth/decorators/is-public.decorator';
-import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+import { IsPublic } from '../auth/decorators/is-public.decorator';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { FileInterceptor } from '@nestjs/platform-express/multer';
 
 @Controller('users')
