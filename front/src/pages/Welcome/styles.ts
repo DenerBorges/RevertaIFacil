@@ -15,10 +15,10 @@ export const Container = styled.div`
 `;
 
 export const Image = styled.img`
-  margin: 0.5rem;
+  margin: 5rem 0.5rem;
   padding: 0 1rem;
   width: 100%;
-  max-width: 400px;
+  max-width: 600px;
   height: auto;
 `;
 

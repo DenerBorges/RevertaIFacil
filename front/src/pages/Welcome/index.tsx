@@ -8,9 +8,8 @@ const Welcome: React.FC = () => {
 
   return (
     <Container>
-      <Image src={require("../../assets/images/trashcans.png")} alt="Logo" />
       <Image
-        src={require("../../assets/images/revertaifacil.png")}
+        src={require("../../assets/images/revertaifacillogo.png")}
         alt="Logo"
       />
       <PrimaryButton type="button" onClick={() => navigate("/signin")}>
