@@ -2,7 +2,7 @@ import React, { FormEvent, useEffect, useState } from "react";
 import Navbar from "../../../components/Navbar";
 import api from "../../../utils/api";
 import { useNavigate } from "react-router-dom";
-import { ChevronLeftIcon, UserIcon } from "@heroicons/react/24/outline";
+import { ChevronLeftIcon, InformationCircleIcon, UserIcon } from "@heroicons/react/24/outline";
 import { userType } from "../../../types/user";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -16,6 +16,7 @@ import {
   Container,
   ContentWrapper,
   ErrorText,
+  Info,
   Input,
   Label,
   ModalButton,
@@ -43,6 +44,7 @@ const MyData: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const [temporaryProfilePic, setTemporaryProfilePic] = useState(profilePic);
+  const [isDisabled, setIsDisabled] = useState(false);
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
   const navigate = useNavigate();
@@ -60,6 +62,10 @@ const MyData: React.FC = () => {
       setZipCode(response.data.zipCode);
       setNumber(response.data.number);
       setComplement(response.data.complement);
+
+      if (response.data.email.includes("@gmail.com")) {
+        setIsDisabled(true);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -210,6 +216,12 @@ const MyData: React.FC = () => {
           >
             <ChevronLeftIcon width={20} strokeWidth={3} color="#319E42" />
           </BackButton>
+          {isDisabled && (
+            <Info>
+              <InformationCircleIcon />
+              Não é possível modificar seu email Google!
+            </Info>
+          )}
           <Col>
             <UserIcon width={30} strokeWidth={2} />
             <Col2>
@@ -300,6 +312,7 @@ const MyData: React.FC = () => {
             placeholder="Digite seu email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            disabled={isDisabled}
             hasError={!!errors.email}
           />
           {errors.email && <ErrorText>{errors.email}</ErrorText>}

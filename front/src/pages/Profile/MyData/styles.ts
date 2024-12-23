@@ -40,9 +40,26 @@ export const BackButton = styled.button`
   }
 `;
 
+export const Info = styled.div`
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+  color: #004085;
+  background-color: #cce5ff;
+  padding: 10px;
+  border: 1px solid #004085;
+  border-radius: 10px;
+
+  svg {
+    width: 30px;
+    color: #004085;
+    margin-right: 10px;
+  }
+`;
+
 export const Col = styled.div`
   display: flex;
-  margin-top: 1.5rem;
+  margin-top: 0.5rem;
   margin-bottom: 1rem;
 `;
 
@@ -126,15 +143,16 @@ export const ModalCloseButton = styled.button`
 `;
 
 export const Label = styled.label`
-  font-size: 18px;
+  font-size: 16px;
+  font-weight: 600;
 `;
 
-export const Input = styled.input<{ hasError: boolean }>`
-  background-color: ${COLORS.white};
+export const Input = styled.input<{ hasError: boolean; disabled?: boolean }>`
+  background-color: ${(props) => (props.disabled ? "#dfdfdf" : COLORS.white)};
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   border: solid 2px #f1f1f1;
   border-radius: 0.6rem;
-  margin: 0.5rem 0;
+  margin-bottom: 0.5rem;
   height: 2.5rem;
   font-size: 17px;
   padding: 1.2rem 0.8rem;
@@ -160,7 +178,7 @@ export const StyledInputMask = styled(InputMask)<{ hasError: boolean }>`
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   border: solid 2px #f1f1f1;
   border-radius: 0.6rem;
-  margin: 0.5rem 0;
+  margin-bottom: 0.5rem;
   height: 2.5rem;
   font-size: 17px;
   padding: 1.2rem 0.8rem;
