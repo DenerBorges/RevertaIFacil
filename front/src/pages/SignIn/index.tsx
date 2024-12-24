@@ -143,6 +143,7 @@ const SignIn: React.FC = () => {
   const handleFacebookResponse = async (response: any) => {
     if (response.status !== "unknown") {
       try {
+         console.log("Resposta do Facebook:", response);
         const { email, name, id: facebookId, picture } = response;
 
         const [firstName, ...lastNameArray] = name.split(" ");
