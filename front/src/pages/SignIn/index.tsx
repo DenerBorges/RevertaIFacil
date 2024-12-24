@@ -143,13 +143,10 @@ const SignIn: React.FC = () => {
   const handleFacebookResponse = async (response: any) => {
     if (response.status !== "unknown") {
       try {
-        console.log("Resposta do Facebook:", response);
         const graphResponse = await fetch(
           `https://graph.facebook.com/me?fields=id,name,email,picture&access_token=${response.accessToken}`
         );
         const userData = await graphResponse.json();
-
-        console.log("Dados do usuário do Facebook:", userData);
 
         const { email, name, id: facebookId, picture } = userData;
 
