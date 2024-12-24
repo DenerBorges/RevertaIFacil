@@ -150,10 +150,11 @@ const SignIn: React.FC = () => {
         const userData = await graphResponse.json();
 
         console.log("Dados do usuário do Facebook:", userData);
-        const { email, name, id: facebookId, picture } = response;
 
-        const [firstName, ...lastNameArray] = name.split(" ");
-        const lastName = lastNameArray.join(" ");
+        const { email, name, id: facebookId, picture } = userData;
+
+        const firstName = name ? name.split(" ")[0] : "Usuário";
+        const lastName = name ? name.split(" ").slice(1).join(" ") : "";
 
         const existingUserResponse = await api.get("users");
         const existingUserEmails = existingUserResponse.data.map(
