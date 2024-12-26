@@ -117,11 +117,72 @@ const User: React.FC = () => {
 
   // Facebook
 
-  const handleFacebookResponse = (response: any) => {
+  const handleFacebookResponse = async (response: any) => {
     if (response.status !== "unknown") {
-      console.log("Facebook login successful:", response);
+      try {
+        const graphResponse = await fetch(
+          `https://graph.facebook.com/me?fields=id,name,email,picture&access_token=${response.accessToken}`
+        );
+        const userData = await graphResponse.json();
+
+        const { email, name, id: facebookId, picture } = userData;
+
+        const firstName = name ? name.split(" ")[0] : "Usuário";
+        const lastName = name ? name.split(" ").slice(1).join(" ") : "";
+
+        const existingUserResponse = await api.get("users");
+        const existingUserEmails = existingUserResponse.data.map(
+          (user: any) => user.email
+        );
+
+        if (existingUserEmails.includes(email)) {
+          const loginResponse = await api.post("login", {
+            user: email,
+            password: facebookId,
+          });
+
+          const { access_token, user_email } = loginResponse.data;
+
+          localStorage.setItem("userToken", access_token);
+          localStorage.setItem("userEmail", user_email);
+          navigate("/home");
+        } else {
+          await api.post("users", {
+            firstName,
+            lastName,
+            email,
+            password: facebookId,
+            profilePic: picture?.data?.url || "https://i.imgur.com/6zvhinZ.png",
+            mobile: "",
+            document: "",
+            zipCode: "",
+            street: "",
+            number: "",
+            complement: "",
+            neighborhood: "",
+            city: "",
+            state: "",
+          });
+
+          const loginResponse = await api.post("login", {
+            user: email,
+            password: facebookId,
+          });
+
+          const { access_token, user_email } = loginResponse.data;
+
+          localStorage.setItem("userToken", access_token);
+          localStorage.setItem("userEmail", user_email);
+          navigate("/home");
+        }
+      } catch (error) {
+        console.error(
+          "Erro ao processar o login/cadastro com o Facebook:",
+          error
+        );
+      }
     } else {
-      console.error("Facebook login failed");
+      console.error("Falha no login com o Facebook.");
     }
   };
 
