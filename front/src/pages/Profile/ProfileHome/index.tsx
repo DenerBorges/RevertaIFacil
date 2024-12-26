@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../../../components/Navbar";
+import api from "../../../utils/api";
+import { userType } from "../../../types/user";
 import {
   ArrowRightStartOnRectangleIcon,
   BellIcon,
@@ -10,6 +12,22 @@ import {
 import { Container, ContentWrapper, HR, Link, MainText, Text } from "./styles";
 
 const Profile: React.FC = () => {
+  const [profile, setProfile] = useState<userType>();
+    const [firstName, setFirstName] = useState("");
+
+  const getProfile = async () => {
+    try {
+      const response = await api.get("users/profile");
+      setProfile(response.data);
+      setFirstName(response.data.firstName);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+      getProfile();
+    }, []);
 
   const handleLogout = () => {
     localStorage.removeItem("userToken");
@@ -21,7 +39,7 @@ const Profile: React.FC = () => {
       <Navbar />
       <Container>
         <ContentWrapper>
-          <MainText>Nome da pessoa</MainText>
+          <MainText>Olá {firstName}</MainText>
           <Link href="/mydata" aria-label="Meus dados">
             <UserIcon width={30} strokeWidth={2} />
             <Text>Meus dados</Text>
