@@ -3,7 +3,7 @@
 ## Description
 
 <p align="justify">
-Reverta IFácil application is a reverse logistics solution for the correct disposal of recyclable objects, focusing mainly on tires and cleaning product containers.
+Reverta IFácil application is a reverse logistics solution for the correct disposal of recyclable objects, focusing mainly on vehicle tire.
 </p>
 
 ## Getting Started
@@ -20,6 +20,14 @@ Also it's nice to have an editor to work with the code like [VSCode](https://cod
 
 <p align="justify">
 Port: 3000
+
+## Access
+
+### Access the website by clicking on the link:
+
+https://reverta-ifacil.vercel.app
+
+## OR
 
 ## Installation
 
